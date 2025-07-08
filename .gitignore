@@ -1,0 +1,52 @@
+# === Python / Flask ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+.env.*
+venv/
+instance/
+.mypy_cache/
+.pytest_cache/
+.DS_Store
+
+# === Flask extensions ===
+*.log
+*.sqlite3
+
+# === Node / React ===
+frontend/node_modules/
+frontend/.env
+frontend/.env.local
+frontend/dist/
+frontend/.vite/
+
+# === VSCode ===
+.vscode/
+*.code-workspace
+
+# === OS files ===
+Thumbs.db
+.DS_Store
+
+# === Environment & Package Managers ===
+.env
+Pipfile.lock
+poetry.lock
+yarn.lock
+package-lock.json
+
+# === Build output ===
+build/
+dist/
+*.egg-info/
+
+# === Coverage ===
+htmlcov/
+.coverage
+.tox/
+
+# === Others ===
+*.bak
+*.swp
