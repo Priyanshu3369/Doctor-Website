@@ -1,29 +1,32 @@
 from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
 
-# Load env variables
+from auth import auth_bp
+from dashboard import dashboard_bp
+
 load_dotenv()
 
 app = Flask(__name__)
-
-# Config
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 
-# JWT
 jwt = JWTManager(app)
 
-# MongoDB
-client = MongoClient(os.getenv('MONGO_URI'))
-db = client.get_database()
+# CORS for React dev server
+CORS(app, origins=["http://localhost:5173"])
 
-# Test API route
+client = MongoClient(os.getenv('MONGO_URI'))
+db = client['healthcare_db']
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
     return jsonify({"status": "OK", "message": "Backend is working!"}), 200
 
+app.register_blueprint(auth_bp)
+app.register_blueprint(dashboard_bp)
+
 if __name__ == '__main__':
     app.run(debug=True)
-
