@@ -23,7 +23,7 @@ def register():
     if not name or not email or not password or not role:
         return jsonify({'error': 'Missing fields'}), 400
 
-    if role not in ['patient', 'doctor']:
+    if role not in ['patient', 'doctor', 'admin']:
         return jsonify({'error': 'Invalid role'}), 400
 
     collection = db['users']
@@ -57,7 +57,6 @@ def login():
     if not user or not check_password_hash(user['password'], password):
         return jsonify({'error': 'Invalid credentials'}), 401
 
-    # ✅ CORRECT: identity = email (string), role = claim
     access_token = create_access_token(
         identity=user['email'],
         additional_claims={"role": user['role']}

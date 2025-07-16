@@ -10,6 +10,7 @@ from dashboard import dashboard_bp
 from doctor import doctor_bp
 from doctor_slots import slots_bp
 from patient_booking import patient_bp
+from admin import admin_bp
 
 load_dotenv()
 
@@ -33,6 +34,7 @@ app.register_blueprint(dashboard_bp)
 app.register_blueprint(doctor_bp)
 app.register_blueprint(slots_bp)
 app.register_blueprint(patient_bp)
+app.register_blueprint(admin_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)
