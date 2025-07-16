@@ -7,6 +7,7 @@ import os
 
 from auth import auth_bp
 from dashboard import dashboard_bp
+from doctor import doctor_bp
 
 load_dotenv()
 
@@ -15,7 +16,7 @@ app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 
 jwt = JWTManager(app)
 
-# CORS for React dev server
+
 CORS(app, origins=["http://localhost:5173"])
 
 client = MongoClient(os.getenv('MONGO_URI'))
@@ -27,6 +28,7 @@ def health_check():
 
 app.register_blueprint(auth_bp)
 app.register_blueprint(dashboard_bp)
+app.register_blueprint(doctor_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)
