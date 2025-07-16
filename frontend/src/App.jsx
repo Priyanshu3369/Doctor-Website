@@ -1,37 +1,45 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+
+// ✅ Pages (example — adjust to your files!)
+import Home from './pages/Home'
+import About from './pages/About'
+import Contact from './pages/Contact'
 import Register from './pages/Register'
 import Login from './pages/Login'
+
+// Dashboards & features
 import PatientDashboard from './pages/PatientDashboard'
+import BookAppointment from './pages/PatientBooking'
 import DoctorDashboard from './pages/DoctorDashboard'
-import DoctorProfile from './pages/DoctorProfile'
 import DoctorSlots from './pages/DoctorSlots'
-import PatientBooking from './pages/PatientBooking'
 import AdminPanel from './pages/AdminPanel'
 
-function App() {
+export default function App() {
   return (
-    <BrowserRouter>
-      <nav className="p-4 bg-gray-800 flex gap-4">
-        <Link to="/" className="text-purple-400">Home</Link>
-        <Link to="/register" className="text-purple-400">Register</Link>
-        <Link to="/login" className="text-purple-400">Login</Link>
-        <Link to="/patient-dashboard" className="text-purple-400">Patient Dashboard</Link>
-        <Link to="/doctor-dashboard" className="text-purple-400">Doctor Dashboard</Link>
-      </nav>
-      <Routes>
-        <Route path="/" element={<div className="p-8">Home Page</div>} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/patient-dashboard" element={<PatientDashboard />} />
-        <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
-        <Route path="/doctor-profile" element={<DoctorProfile />} />
-        <Route path="/doctor-slots" element={<DoctorSlots />} />
-        <Route path="/patient-booking" element={<PatientBooking />} />
-        <Route path="/admin" element={<AdminPanel />} />
-      </Routes>
-    </BrowserRouter>
+    <Router>
+      <Layout>
+        <Routes>
+          {/* Public */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+
+          {/* Patient */}
+          <Route path="/dashboard/patient" element={<PatientDashboard />} />
+          <Route path="/book-appointment" element={<BookAppointment />} />
+
+          {/* Doctor */}
+          <Route path="/dashboard/doctor" element={<DoctorDashboard />} />
+          <Route path="/create-slot" element={<DoctorSlots />} />
+
+          {/* Admin */}
+          <Route path="/dashboard/admin" element={<AdminPanel />} />
+        </Routes>
+      </Layout>
+    </Router>
   )
 }
-
-export default App
